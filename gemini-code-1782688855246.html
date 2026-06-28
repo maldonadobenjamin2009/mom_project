@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feria de Ciencias 2026 - Banderas</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+  :root {
+    --bg-main: #f0fdf4;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --accent: #3b82f6; /* Cambiado a un tono azul acorde al tema general */
+    --card-bg: #ffffff;
+    --border-radius-xl: 20px;
+    --border-radius-lg: 16px;
+    --border-radius-md: 12px;
+    --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+    --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body { 
+    font-family: 'Nunito', sans-serif; 
+    background-color: var(--bg-main); 
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+    line-height: 1.5;
+  }
+
+  .container { width: 100%; max-width: 720px; padding-bottom: 60px; }
+  .sr-only { display: none; }
+
+  /* --- PESTAÑAS (TABS) --- */
+  .tabs { 
+    display: flex; 
+    flex-wrap: wrap;
+    background: #e5e7eb; 
+    border-radius: var(--border-radius-lg); 
+    padding: 6px; 
+    margin-bottom: 2rem; 
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.06); 
+  }
+  .tab-btn {
+    flex: 1 1 20%; padding: 12px 10px; border: none; background: transparent; 
+    border-radius: var(--border-radius-md); font-size: 16px; font-weight: 700; 
+    cursor: pointer; color: #9ca3af; transition: var(--transition); 
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    min-width: 120px;
+  }
+  .tab-btn.active { 
+    background: var(--card-bg); color: var(--accent); 
+    box-shadow: var(--shadow-sm); transform: scale(1.02);
+  }
+  .tab-btn:hover:not(.active) { color: var(--text-main); }
+
+  /* --- PANELES --- */
+  .panel { display: none; animation: fadeIn 0.5s ease-out; }
+  .panel.active { display: block; }
+  @keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(15px); } 
+    to { opacity: 1; transform: translateY(0); } 
+  }
+
+  /* --- CABECERA DE LA FICHA --- */
+  .ficha-header {
+    display: flex; align-items: center; gap: 20px; padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #ffffff 0%, #dbeafe 100%);
+    border-radius: var(--border-radius-xl); margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-sm); border: 2px solid #bfdbfe;
+  }
+  
+  /* Variaciones de colores por país */
+  #argelia .ficha-header { background: linear-gradient(135deg, #ffffff 0%, #d1fae5 100%); border-color: #a7f3d0; }
+  #austria .ficha-header { background: linear-gradient(135deg, #ffffff 0%, #fee2e2 100%); border-color: #fecaca; }
+  #jordania .ficha-header { background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%); border-color: #d1d5db; }
+  
+  .flag-icon img { 
+    width: 80px; 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15); 
+    transition: transform 0.3s ease;
+    display: block;
+  }
+  .ficha-header:hover .flag-icon img { transform: scale(1.1) rotate(2deg); }
+  .ficha-header h2 { font-size: 26px; font-weight: 800; color: #1e3a8a; margin-bottom: 4px; }
+  #argelia .ficha-header h2 { color: #064e3b; }
+  #austria .ficha-header h2 { color: #7f1d1d; }
+  #jordania .ficha-header h2 { color: #111827; }
+  
+  .ficha-header p { font-size: 15px; color: var(--text-muted); font-weight: 600; }
+
+  /* --- TARJETAS DE DATOS (GRIDS) --- */
+  .grid-2 { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 14px; margin-bottom: 14px; 
+  }
+  .card {
+    background: var(--card-bg); border: 2px solid #f3f4f6; 
+    border-radius: var(--border-radius-lg); padding: 1.2rem; 
+    box-shadow: var(--shadow-sm); transition: var(--transition);
+  }
+  .card:hover { 
+    transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #bfdbfe; 
+  }
+  
+  .card-label { 
+    font-size: 12px; font-weight: 800; color: #9ca3af; 
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; 
+  }
+  .card-value { font-size: 15px; font-weight: 600; color: var(--text-main); }
+
+  /* --- DATO CURIOSO --- */
+  .dato-curioso {
+    background: linear-gradient(to right, #eff6ff, #ffffff);
+    border-left: 6px solid #3b82f6;
+    border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
+    padding: 1.2rem 1.5rem; font-size: 15px; color: #1e3a8a; font-weight: 600;
+    margin-top: 1.5rem; box-shadow: var(--shadow-sm);
+    position: relative; overflow: hidden;
+  }
+  .dato-curioso::before {
+    content: '💡'; position: absolute; right: 10px; bottom: -10px; 
+    font-size: 60px; opacity: 0.1;
+  }
+  .dato-curioso strong { color: #2563eb; font-weight: 800; display: block; margin-bottom: 6px; font-size: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* --- AUTOR --- */
+  .autor { 
+    font-size: 16px; font-weight: 800; color: #374151; 
+    text-align: center; margin-top: 2.5rem; padding-top: 1.5rem; 
+    border-top: 2px dashed #d1d5db; 
+  }
+  .autor span {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #9ca3af;
+    margin-top: 4px;
+  }
+
+  /* =========================================
+     SISTEMA DEL QUIZ GAME
+     ========================================= */
+  
+  .floating-quiz-btn {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
+    z-index: 999;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .floating-quiz-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px -5px rgba(59, 130, 246, 0.7);
+  }
+
+  .quiz-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .quiz-container {
+    background: var(--card-bg);
+    padding: 2.5rem 2rem;
+    border-radius: var(--border-radius-xl);
+    max-width: 480px;
+    width: 92%;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    text-align: center;
+    animation: quizPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes quizPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .close-quiz-btn {
+    position: absolute;
+    top: 15px; right: 15px;
+    background: #f3f4f6; border: none;
+    width: 32px; height: 32px; border-radius: 50%;
+    cursor: pointer; font-weight: bold; color: var(--text-muted);
+    transition: var(--transition);
+  }
+  .close-quiz-btn:hover { background: #fee2e2; color: #ef4444; }
+
+  .quiz-title { font-size: 24px; font-weight: 800; color: #1e3a8a; margin-bottom: 12px; }
+  .quiz-text { color: var(--text-muted); font-size: 15px; margin-bottom: 24px; font-weight: 600; }
+  
+  .quiz-progress { font-size: 12px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .quiz-question { font-size: 18px; font-weight: 700; color: var(--text-main); margin-bottom: 24px; line-height: 1.4; }
+  
+  .quiz-options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 10px; }
+  .quiz-opt-btn {
+    padding: 14px 18px;
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+    text-align: left;
+    transition: var(--transition);
+  }
+  .quiz-opt-btn:hover {
+    background: #eff6ff; border-color: var(--accent); color: #1e40af; transform: translateX(6px);
+  }
+
+  .quiz-action-btn {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white; border: none; border-radius: 50px;
+    font-weight: 700; font-size: 16px; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2); transition: var(--transition);
+  }
+  .quiz-action-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(59, 130, 246, 0.3); }
+
+  .score-highlight { font-size: 22px; font-weight: 800; color: #111827; margin: 15px 0; }
+  .score-number { color: var(--accent); font-size: 28px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="sr-only">LA BANDERA NOS REPRESENTA [cite: 3] - Fichas informativas</h2>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('argentina')">
+      🇦🇷 Argentina
+    </button>
+    <button class="tab-btn" onclick="showTab('argelia')">
+      🇩🇿 Argelia
+    </button>
+    <button class="tab-btn" onclick="showTab('austria')">
+      🇦🇹 Austria
+    </button>
+    <button class="tab-btn" onclick="showTab('jordania')">
+      🇯🇴 Jordania
+    </button>
+  </div>
+
+  <div id="argentina" class="panel active">
+    <div class="ficha-header">
+      <div class="flag-icon"><img src="banderaA.png" alt="Bandera de Argentina"></div>
+      <div>
+        <h2>BANDERA DE ARGENTINA [cite: 4]</h2>
+        <p>“LA BANDERA NOS REPRESENTA” [cite: 3]</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Colores</div>
+        <div class="card-value">Es de color celeste y blanco [cite: 5]</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Diseño de franjas</div>
+        <div class="card-value">Tiene tres (3) franjas horizontales, celeste, blanca y celeste [cite: 6]</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Centro</div>
+        <div class="card-value">En el medio tiene un sol de color amarillo [cite: 7]</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Simbología relacionada</div>
+        <div class="card-value">Tiene los mismos colores que la escarapela [cite: 8]</div>
+      </div>
+    </div>
+
+    <div class="dato-curioso">
+      <strong>Dato Histórico:</strong> La creó Manuel Belgrano a orillas del río Paraná [cite: 9]
+    </div>
+
+    <div class="autor">
+      FERIA DE CIENCIAS 2026 [cite: 1]
+      <span>JARDÍN MUNICIPAL DEODORO [cite: 2]</span>
+    </div>
+  </div>
+
+  <div id="argelia" class="panel">
+    <div class="ficha-header">
+      <div class="flag-icon"><img src="banderaAr.png" alt="Bandera de Argelia"></div>
+      <div>
+        <h2>BANDERA DE ARGELIA [cite: 10]</h2>
+        <p>“LA BANDERA NOS REPRESENTA” [cite: 3]</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Colores</div>
+        <div class="card-value">Es de color verde y blanco [cite: 11]</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Diseño de franjas</div>
+        <div class="card-value">Tiene dos (2) franjas verticales [cite: 12]</div>
+      </div>
+      <div class="card" style="grid-column: 1 / -1;">
+        <div class="card-label">Centro</div>
+        <div class="card-value">En el medio tiene una luna y una estrella de color rojo [cite: 13]</div>
+      </div>
+    </div>
+
+    <div class="autor">
+      FERIA DE CIENCIAS 2026 [cite: 1]
+      <span>JARDÍN MUNICIPAL DEODORO [cite: 2]</span>
+    </div>
+  </div>
+
+  <div id="austria" class="panel">
+    <div class="ficha-header">
+      <div class="flag-icon"><img src="banderaAu.png" alt="Bandera de Austria"></div>
+      <div>
+        <h2>BANDERA DE AUSTRIA [cite: 14]</h2>
+        <p>“LA BANDERA NOS REPRESENTA” [cite: 3]</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Colores</div>
+        <div class="card-value">Es de color roja y blanca [cite: 15]</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Diseño de franjas</div>
+        <div class="card-value">Tiene tres (3) franjas horizontales, roja, blanca y roja [cite: 16]</div>
+      </div>
+    </div>
+
+    <div class="autor">
+      FERIA DE CIENCIAS 2026 [cite: 1]
+      <span>JARDÍN MUNICIPAL DEODORO [cite: 2]</span>
+    </div>
+  </div>
+
+  <div id="jordania" class="panel">
+    <div class="ficha-header">
+      <div class="flag-icon"><img src="banderaJ.png" alt="Bandera de Jordania"></div>
+      <div>
+        <h2>BANDERA DE JORDANIA [cite: 17]</h2>
+        <p>“LA BANDERA NOS REPRESENTA” [cite: 3]</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Colores Principales</div>
+        <div class="card-value">Es de color negro, blanco y verde [cite: 18]</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Diseño de franjas</div>
+        <div class="card-value">Tiene tres franjas horizontales [cite: 19]</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 14px;">
+      <div class="card-label">Diseño en el Asta</div>
+      <div class="card-value">A un lado del asta, tiene en triángulo de color rojo, que une las tres franjas [cite: 20]</div>
+    </div>
+
+    <div class="card" style="margin-bottom: 14px;">
+      <div class="card-label">Centro del Triángulo</div>
+      <div class="card-value">En el centro tiene una estrella blanca de siete (7) puntas [cite: 21]</div>
+    </div>
+
+    <div class="autor">
+      FERIA DE CIENCIAS 2026 [cite: 1]
+      <span>JARDÍN MUNICIPAL DEODORO [cite: 2]</span>
+    </div>
+  </div>
+
+</div>
+
+<button class="floating-quiz-btn" onclick="openQuiz()">
+  🎮 ¡Jugar Trivia!
+</button>
+
+<div id="quiz-modal" class="quiz-overlay">
+  <div class="quiz-container">
+    <button class="close-quiz-btn" onclick="closeQuiz()">✕</button>
+    
+    <div id="quiz-start">
+      <h3 class="quiz-title">🏆 Posibles Preguntas [cite: 22]</h3>
+      <p class="quiz-text">¿Prestaste atención a las banderas? Responde este juego con las preguntas de la feria.</p>
+      <button class="quiz-action-btn" onclick="startQuiz()">Comenzar Juego</button>
+    </div>
+
+    <div id="quiz-body" style="display: none;">
+      <div class="quiz-progress" id="quiz-progress">Pregunta 1 de 6</div>
+      <div class="quiz-question" id="quiz-question">Cargando pregunta...</div>
+      <div class="quiz-options" id="quiz-options">
+        </div>
+    </div>
+
+    <div id="quiz-result" style="display: none;">
+      <h3 class="quiz-title">🎉 ¡Juego Terminado!</h3>
+      <div class="score-highlight">Tu puntuación es: <span id="quiz-score" class="score-number">0</span> / <span id="quiz-total">6</span></div>
+      <p id="quiz-feedback" class="quiz-text">¡Buen intento!</p>
+      <button class="quiz-action-btn" onclick="startQuiz()">Intentar de Nuevo</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// POSIBLES PREGUNTAS [cite: 22]
+const quizData = [
+  {
+    q: "¿QUÉ COLOR COMPARTEN LAS CUATRO (4) BANDERAS? [cite: 23]",
+    o: ["Celeste", "Blanco", "Rojo", "Verde"],
+    a: 1 
+  },
+  {
+    q: "¿QUÉ BANDERAS TIENEN TRES FRANJAS? [cite: 24]",
+    o: ["Solo Austria", "Argentina y Argelia", "Argentina, Austria y Jordania", "Argelia y Jordania"],
+    a: 2 
+  },
+  {
+    q: "¿CUÁLES SON LAS BANDERAS QUE TIENEN COLOR ROJO? [cite: 25]",
+    o: ["Argelia, Austria y Jordania", "Argentina y Austria", "Solo Jordania", "Ninguna"],
+    a: 0 
+  },
+  {
+    q: "¿CUÁLES SON LAS BANDERAS QUE TIENEN COLOR VERDE? [cite: 26]",
+    o: ["Argentina y Austria", "Solo Argelia", "Argelia y Jordania", "Austria y Jordania"],
+    a: 2 
+  },
+  {
+    q: "¿CUÁLES SON LAS BANDERAS QUE TIENEN UNA ESTRELLA? [cite: 27]",
+    o: ["Argentina y Jordania", "Argelia y Jordania", "Austria y Argelia", "Solo Argentina"],
+    a: 1 
+  },
+  {
+    q: "¿CUÁNTOS GOLES HIZO ARGENTINA EN LA FASE DE GRUPOS? [cite: 28]",
+    o: ["2 goles", "5 goles", "10 goles", "Ninguno"],
+    a: 1 
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function openQuiz() {
+  document.getElementById('quiz-modal').style.display = 'flex';
+  document.getElementById('quiz-start').style.display = 'block';
+  document.getElementById('quiz-body').style.display = 'none';
+  document.getElementById('quiz-result').style.display = 'none';
+}
+
+function closeQuiz() {
+  document.getElementById('quiz-modal').style.display = 'none';
+}
+
+function startQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  document.getElementById('quiz-start').style.display = 'none';
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-body').style.display = 'block';
+  loadQuestion();
+}
+
+function loadQuestion() {
+  const qObj = quizData[currentQuestion];
+  document.getElementById('quiz-progress').innerText = `Pregunta ${currentQuestion + 1} de ${quizData.length}`;
+  document.getElementById('quiz-question').innerText = qObj.q;
+  
+  const optionsContainer = document.getElementById('quiz-options');
+  optionsContainer.innerHTML = '';
+  
+  qObj.o.forEach((optionText, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt-btn';
+    btn.innerText = optionText;
+    btn.onclick = () => handleAnswer(idx);
+    optionsContainer.appendChild(btn);
+  });
+}
+
+function handleAnswer(selectedIdx) {
+  if (selectedIdx === quizData[currentQuestion].a) {
+    score++;
+  }
+  
+  currentQuestion++;
+  if (currentQuestion < quizData.length) {
+    loadQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function showResults() {
+  document.getElementById('quiz-body').style.display = 'none';
+  document.getElementById('quiz-result').style.display = 'block';
+  document.getElementById('quiz-score').innerText = score;
+  document.getElementById('quiz-total').innerText = quizData.length;
+  
+  let feedback = "";
+  if (score === quizData.length) {
+    feedback = "🇦🇷 ¡Excelente trabajo! Respondiste todas las preguntas de la feria correctamente. 🏆";
+  } else if (score >= quizData.length / 2) {
+    feedback = "🌟 ¡Muy bien! Conoces mucho sobre las banderas, revisa de nuevo para alcanzar el total.";
+  } else {
+    feedback = "📘 ¡Sigue practicando! Lee las fichas de las banderas para aprender más detalles.";
+  }
+  document.getElementById('quiz-feedback').innerText = feedback;
+}
+</script>
+
+</body>
+</html>
